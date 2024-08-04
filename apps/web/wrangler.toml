@@ -8,5 +8,9 @@ mode = "smart"
 
 [[d1_databases]]
 binding = "DATABASE"
-database_name = "new-commit"
-database_id = "6e4ffe08-4acc-4436-9677-9fa0d2cf3bfa"
+database_name = "hactivist3-db"
+database_id = "11eeca72-6ae8-4ec7-b26f-981e9b02098c"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "hactivist3"

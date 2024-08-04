@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
 	integer,
 	primaryKey,
@@ -14,6 +15,7 @@ export const users = sqliteTable("user", {
 	email: text("email").notNull(),
 	emailVerified: integer("emailVerified", { mode: "timestamp_ms" }),
 	image: text("image"),
+	role: text('role', { enum: ["user", "agent", 'admin'] }).default("user"),
 });
 
 export type User = Omit<typeof users.$inferSelect, "id">;
@@ -61,3 +63,19 @@ export const verificationTokens = sqliteTable(
 		compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
 	}),
 );
+
+export const report = sqliteTable("report", {
+	id: integer('id').primaryKey({ autoIncrement: true }),
+	userId: text("userId")
+	.notNull()
+	.references(() => users.id, { onDelete: "cascade" }),
+	phone: integer("phone"),
+	issue: text('issue', { enum: ["light", "sewage", 'water', 'sanitaion', 'crime', 'miscellaneous'] }).default("miscellaneous").notNull(),
+	city: text("city").notNull(),
+	address: text("address").notNull(),
+	description: text("description").notNull(),
+	imageUrl: text("imageUrl"),
+	status: text('status', { enum: ["pending", "resolved", 'dismissed'] }).default("pending").notNull(),
+  created: integer('created', { mode: 'timestamp' }).default(sql`(CURRENT_TIMESTAMP)`).notNull(),
+  resolved: integer("resolved", { mode: "timestamp_ms" }),
+}) 
