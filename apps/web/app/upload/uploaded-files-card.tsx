@@ -56,14 +56,14 @@ function EmptyCard({
 
 export function UploadedFilesCard({ uploadedFiles }: UploadedFilesCardProps) {
 	return (
-		<Card>
+		<Card className="bg-white text-black border-gray-300 w-full border-[1px]">
 			<CardHeader>
-				<CardTitle>Uploaded files</CardTitle>
-				<CardDescription>View the uploaded files here</CardDescription>
+				<CardTitle>Uploaded Images</CardTitle>
+				<CardDescription className="text-gray-900">These will be sent to the respective team.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				{uploadedFiles.length > 0 ? (
-					<ScrollArea className="pb-4">
+					<ScrollArea className="pb-4 light">
 						<div className="flex w-max space-x-2.5">
 							{uploadedFiles.map((file) => (
 								<div key={file.key} className="relative aspect-video w-64">
@@ -71,7 +71,7 @@ export function UploadedFilesCard({ uploadedFiles }: UploadedFilesCardProps) {
 										src={file.url}
 										alt={file.name}
 										fill
-										sizes="(min-width: 640px) 640px, 100vw"
+										sizes="(min-width: 320px) 320px"
 										loading="lazy"
 										className="rounded-md object-cover"
 									/>

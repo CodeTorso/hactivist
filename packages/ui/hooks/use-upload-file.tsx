@@ -5,9 +5,13 @@ export function useUploadFile<T>(key: string, options?: T) {
 	const [isUploading, setIsUploading] = useState(false);
 	const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
+	function resetuploadedFiles(){
+		setUploadedFiles([])
+	}
+
 	const uploadFiles = async (image: File[]) => {
 		setIsUploading(true);
-		await Promise.all(
+		const res = await Promise.all(
 			image.map(async (file) => {
 				const fileName = `${file.name.split(".")[0]! + Date.now()}.${file.name.split(".")[1]}`;
 
@@ -62,9 +66,11 @@ export function useUploadFile<T>(key: string, options?: T) {
 		);
 
 		setIsUploading(false);
+		return res;
 	};
 
 	return {
+		resetuploadedFiles,
 		uploadFiles,
 		uploadedFiles,
 		isUploading,

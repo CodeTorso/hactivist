@@ -11,7 +11,9 @@
     "preview": "bun pages:build && wrangler pages dev",
     "deploy": "bun pages:build && wrangler pages deploy",
     "studio:dev": "drizzle-kit studio",
-    "studio:prd": "cross-env NODE_ENV=production drizzle-kit studio"
+    "studio:prd": "cross-env NODE_ENV=production drizzle-kit studio",
+    "migrate": "wrangler d1 execute hactivist-db --local --file=migrations/0000_setup.sql",
+    "remote": "wrangler d1 execute hactivist-db --remote --file=migrations/0000_setup.sql"
   },
   "dependencies": {
     "better-sqlite3": "^11.1.2"

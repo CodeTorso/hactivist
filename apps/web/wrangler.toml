@@ -14,3 +14,7 @@ database_id = "11eeca72-6ae8-4ec7-b26f-981e9b02098c"
 [[r2_buckets]]
 binding = "STORAGE"
 bucket_name = "hactivist3"
+
+[[kv_namespaces]]
+binding = "IMAGE_STORE"
+id = "ae7c103f15eb4150953e6537da4ca3da"

@@ -1,5 +1,5 @@
 import { Button } from "@repo/ui/src/button";
-import { auth, signIn } from "./server/auth";
+import { auth, signIn } from "../server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { FaGoogle, FaFacebook } from "react-icons/fa";

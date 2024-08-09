@@ -15,7 +15,7 @@ export const users = sqliteTable("user", {
 	email: text("email").notNull(),
 	emailVerified: integer("emailVerified", { mode: "timestamp_ms" }),
 	image: text("image"),
-	role: text('role', { enum: ["user", "agent", 'admin'] }).default("user"),
+	role: text('role', { enum: ["user", 'admin'] }).default("user"),
 });
 
 export type User = Omit<typeof users.$inferSelect, "id">;
@@ -72,10 +72,26 @@ export const report = sqliteTable("report", {
 	phone: integer("phone"),
 	issue: text('issue', { enum: ["light", "sewage", 'water', 'sanitaion', 'crime', 'miscellaneous'] }).default("miscellaneous").notNull(),
 	city: text("city").notNull(),
+	image: text("image"),
 	address: text("address").notNull(),
 	description: text("description").notNull(),
-	imageUrl: text("imageUrl"),
 	status: text('status', { enum: ["pending", "resolved", 'dismissed'] }).default("pending").notNull(),
   created: integer('created', { mode: 'timestamp' }).default(sql`(CURRENT_TIMESTAMP)`).notNull(),
   resolved: integer("resolved", { mode: "timestamp_ms" }),
 }) 
+
+export const imageLink = sqliteTable("imagelink", {
+	reportId: integer("reportId")
+    .notNull()
+    .references(() => report.id, { onDelete: "cascade" }),
+  imageUrl: text("imageUrl").notNull(),
+})
+
+export const adminKey = sqliteTable("adminkey", {
+	key: text("key")
+	.primaryKey()
+	.$defaultFn(() => crypto.randomUUID()),
+	status: text("issue", {
+		enum: ["used", "unused"]
+	}).default("unused").notNull(),
+})

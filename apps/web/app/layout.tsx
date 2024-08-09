@@ -21,7 +21,7 @@ export default function RootLayout({
 			<head>
 				<ThemeScript />
 			</head>
-			<body className={inter.className}>{children}</body>
+			<body className={`bg-[#F6F2EB] text-black ${inter.className}`}>{children}</body>
 		</html>
 	);
 }

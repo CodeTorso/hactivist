@@ -11,4 +11,5 @@ interface CloudflareEnv {
 	R2_BUCKET_NAME: string;
 	STORAGE: R2Bucket;
 	DATABASE: D1Database;
+	IMAGE_STORE: KVNamespace;
 }
